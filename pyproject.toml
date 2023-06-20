@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "app-prestamo"
+version = "0.1.0"
+description = ""
+authors = ["Saul Burgos <saulburgos6@gmail.com>"]
+readme = "README.md"
+packages = [{include = "app_prestamo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.97.0"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+httpx = "^0.24.1"
+pytest = "^7.3.2"
+sqlalchemy = "^2.0.16"
+
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
