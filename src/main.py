@@ -1,4 +1,4 @@
-from fastapi import FastAPI,APIRouter
+from fastapi import FastAPI
 from src.infraestructure.controller.health_cheack import health_check_router
 from src.infraestructure.controller.client import client_routes
 from src.infraestructure.controller.loan import loan_routes
@@ -10,8 +10,14 @@ from src.infraestructure.config.database import Base,engine
 app = FastAPI()
 
 
-Base.metadata.drop_all(bind=engine)
-Base.metadata.create_all(bind=engine)
+# Base.metadata.drop_all(engine)
+Base.prepare(autoload_with=engine,)
+# Base.prepare(autoload_with=engine,schema="clients")
+# Base.metadata.create_all(engine)
+
+# Base.metadata.drop_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
+
 
 
 app.include_router(health_check_router)
