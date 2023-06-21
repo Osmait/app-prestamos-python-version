@@ -1,10 +1,15 @@
-from pydantic import Field,BaseModel
+from pydantic import Field,BaseModel,ValidationError,validator,PydanticValueError
 from datetime import datetime
 from src.infraestructure.models.Frecuency import Frecuency
+from src.infraestructure.controller.exceptions.custon_exceptions import NotFoundException
+
+# class BadRequest(PydanticValueError):
+#     code = "404"
+#     msg_template = 'value is not "{wrong_value}"'
 
 
 class LoanDto(BaseModel):
-
+    amount:float = Field(gt=1)
     payment_date:datetime = Field(alias="paymentDate")
     second_paymentDate:datetime = Field(alias="secondPaymenDate")
     interest:float =Field()
@@ -12,9 +17,11 @@ class LoanDto(BaseModel):
     frequency:Frecuency =Field()
     client_id:str = Field(min_length=1, max_length=50, alias="clientId")
 
+    # @validator("amount")
+    # def validate_amount(cls,v):
+    #     if v < 0  and type(v) == float:
+    #         raise NotFoundException()
+    #     return v
 
-    # @property
-    # def frequency_enum(self) -> Frecuenty:
-    #     return Frecuenty(self.frequency)
 
    

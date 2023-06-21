@@ -1,8 +1,8 @@
 from src.domain.loan.Loan import Loan
 from src.domain.loan.loan_repository import LoanRepository
 from src.infraestructure.models.loan import LoanDto
-import uuid
-from datetime import datetime
+
+
 
 class LoanService:
     def __init__(self,loanRepository:LoanRepository) -> None:

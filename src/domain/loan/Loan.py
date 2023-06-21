@@ -11,6 +11,7 @@ from datetime import datetime
 class Loan(Base):
     __tablename__="loans"
     id = Column(String, primary_key=True, default=uuid.uuid4)
+    amount = Column(Float, nullable=False)
     payment_date = Column(DateTime,nullable=False)
     second_paymentDate = Column(DateTime,nullable=False)
     interest =Column(Float,nullable=False)
