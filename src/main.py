@@ -12,19 +12,19 @@ from src.infraestructure.controller.exceptions.custon_exceptions import NotFound
 
 app = FastAPI()
 
-app.add_exception_handler(NotFoundException,not_found_exception_handler)
-# Base.metadata.drop_all(engine)
 
+# Hander Errors
+app.add_exception_handler(NotFoundException,not_found_exception_handler)
+
+
+# Migration Init
 # Base.metadata.drop_all(engine)
 # Base.prepare(autoload_with=engine)
-# Base.prepare(autoload_with=engine,schema="clients")
-# Base.metadata.create_all(engine)
 Base.metadata.create_all(bind=engine)
-# Base.metadata.drop_all(bind=engine)
-# Base.metadata.create_all(bind=engine)
 
 
 
+# Routes
 app.include_router(health_check_router)
 app.include_router(client_routes)
 app.include_router(loan_routes)
