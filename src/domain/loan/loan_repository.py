@@ -14,3 +14,6 @@ class LoanRepository:
     def create(self,loan:Loan):
         self.db.add(loan)
         self.db.commit()
+    
+    def find_by_client_id(self,id:str):
+      return  self.db.query(Loan).filter(Loan.client_id == id).all()

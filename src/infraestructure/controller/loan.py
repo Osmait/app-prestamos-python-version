@@ -10,9 +10,9 @@ loan_service = LoanService(loan_repository)
 
 loan_routes = APIRouter(prefix="/api/v1")
 
-@loan_routes.get("/loan")
-def get_loans():
-    loanList =   loan_service.findAll()
+@loan_routes.get("/loan/{id}")
+def get_loans(id:str):
+    loanList =   loan_service.findAll(id)
     return JSONResponse(status_code=status.HTTP_200_OK ,content=jsonable_encoder(loanList   ))
 
 @loan_routes.post("/loan")

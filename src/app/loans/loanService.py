@@ -11,8 +11,8 @@ class LoanService:
     def __init__(self,loanRepository:LoanRepository) -> None:
        self.loanRepository = loanRepository
         
-    def findAll(self)-> list[Loan]:
-        return self.loanRepository.find_all()
+    def findAll(self,id:str)-> list[Loan]:
+        return self.loanRepository.find_by_client_id(id);
     
     def create(self,loan:LoanDto)-> None:
         new_client = Loan(**loan.dict())
