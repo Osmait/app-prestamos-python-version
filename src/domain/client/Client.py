@@ -4,8 +4,6 @@ from sqlalchemy.orm import relationship
 import uuid
 from datetime import datetime
 
-
-
 class Client(Base):
     __tablename__="clients"
     id = Column(String, primary_key=True, default=uuid.uuid4)
@@ -17,6 +15,6 @@ class Client(Base):
     deleted =Column(String,nullable=False, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    # loans = relationship("loans", back_populates="clients")
+    loans = relationship("Loan")
 
   

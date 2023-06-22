@@ -1,6 +1,13 @@
 from src.domain.loan.Loan import Loan
 from src.domain.loan.loan_repository import LoanRepository
 from src.infraestructure.models.loan import LoanDto
+from datetime import datetime
+from src.infraestructure.models.Frecuency import Frecuency
+
+
+def is_payment_due(payment:Loan,currentDate:datetime):
+    if payment.frequency  == Frecuency.BIWEEKLY:
+        return payment.payment_date.day == currentDate.day or payment.second_paymentDate.day == currentDate.day
 
 
 
@@ -12,11 +19,18 @@ class LoanService:
         return self.loanRepository.find_all()
     
     def create(self,loan:LoanDto)-> None:
-        # newdate =  datetime.strptime(loan.payment_date,'%Y-%m-%d').date()
-        # newdate2 =  datetime.strptime(loan.payment_date,'%Y-%m-%d').date()
-
-        # loan.payment_date = newdate
-        # loan.second_paymentDate = newdate2
         new_client = Loan(**loan.dict())
         self.loanRepository.create(new_client)
+    
+    def findAllByDAte(self):
+        listofLoan = self.loanRepository.find_all()
+        loanlistReponse = []
+        for loan in listofLoan:
+            if is_payment_due(loan,datetime.now()):
+                loanlistReponse.append(loan)
+        
+        return loanlistReponse
+
+
+
     

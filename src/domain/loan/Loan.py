@@ -4,10 +4,6 @@ from sqlalchemy.orm import relationship
 import uuid
 from datetime import datetime
 
-
-
-
-
 class Loan(Base):
     __tablename__="loans"
     id = Column(String, primary_key=True, default=uuid.uuid4)
@@ -22,7 +18,21 @@ class Loan(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     client_id = Column(String,ForeignKey("clients.id"))
-    client = relationship("Client", back_populates="loans")
+    client = relationship("Client")
+    # transactions = relationship("Transaction", back_populates="loans", cascade='all, delete')
+
+class Transaction(Base):
+    __tablename__="transactions"
+    id = Column(String,primary_key=True, default=uuid.uuid4)
+    transationType = Column(String,nullable=False)
+    amount = Column(Float, nullable=False)
+    deleted =Column(Boolean,nullable=False, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    loan_id = Column(String,ForeignKey("loans.id"))
+    # loan = relationship(
+    #     "Loan",back_populates="transactions")
+
 
 
 

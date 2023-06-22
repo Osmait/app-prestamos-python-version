@@ -19,3 +19,9 @@ def get_loans():
 def post_loans(loan:LoanDto):
     loan_service.create(loan)
     return JSONResponse(status_code=status.HTTP_201_CREATED , content="Created")
+
+@loan_routes.get("/loan-date")
+def get_loansbydate():
+    loanList =   loan_service.findAllByDAte()
+    print(loanList)
+    return JSONResponse(status_code=status.HTTP_200_OK ,content=jsonable_encoder(loanList   ))
