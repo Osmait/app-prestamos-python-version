@@ -5,10 +5,6 @@ from datetime import datetime
 from src.infraestructure.models.Frecuency import Frecuency
 
 
-def is_payment_due(payment:Loan,currentDate:datetime):
-    if payment.frequency  == Frecuency.BIWEEKLY:
-        return payment.payment_date.day == currentDate.day or payment.second_paymentDate.day == currentDate.day
-
 
 
 class LoanService:
@@ -22,7 +18,7 @@ class LoanService:
         new_client = Loan(**loan.dict())
         self.loanRepository.create(new_client)
     
-    def findAllByDAte(self):
+    def findAllByDAte(self) -> list[Loan]:
         listofLoan = self.loanRepository.find_all()
         loanlistReponse = []
         for loan in listofLoan:
@@ -30,6 +26,14 @@ class LoanService:
                 loanlistReponse.append(loan)
         
         return loanlistReponse
+    
+
+
+def is_payment_due(payment:Loan,currentDate:datetime):
+    if payment.frequency  == Frecuency.BIWEEKLY:
+        return payment.payment_date.day == currentDate.day or payment.second_paymentDate.day == currentDate.day
+
+
 
 
 

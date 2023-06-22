@@ -30,8 +30,7 @@ class Transaction(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     loan_id = Column(String,ForeignKey("loans.id"))
-    # loan = relationship(
-    #     "Loan",back_populates="transactions")
+    loan = relationship("Loan")
 
 
 
