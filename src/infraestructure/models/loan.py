@@ -17,11 +17,7 @@ class LoanDto(BaseModel):
     frequency:Frecuency =Field()
     client_id:str = Field(min_length=1, max_length=50, alias="clientId")
 
-    # @validator("amount")
-    # def validate_amount(cls,v):
-    #     if v < 0  and type(v) == float:
-    #         raise NotFoundException()
-    #     return v
+ 
 
 
    

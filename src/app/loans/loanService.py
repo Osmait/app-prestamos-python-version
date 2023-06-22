@@ -20,12 +20,11 @@ class LoanService:
     
     def findAllByDAte(self) -> list[Loan]:
         listofLoan = self.loanRepository.find_all()
-        loanlistReponse = []
-        for loan in listofLoan:
-            if is_payment_due(loan,datetime.now()):
-                loanlistReponse.append(loan)
-        
-        return loanlistReponse
+        # for loan in listofLoan:
+        #     if is_payment_due(loan,datetime.now()):
+        #         loanlistReponse.append(loan)
+
+        return [ loan for loan in listofLoan if is_payment_due(loan,datetime.now())]
     
 
 

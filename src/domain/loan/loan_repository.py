@@ -5,6 +5,7 @@ from src.domain.loan.Loan import Loan
 
 
 class LoanRepository:
+    
     def __init__(self) -> None:
         self.db = Session()
     
